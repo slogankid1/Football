@@ -65,7 +65,7 @@ namespace WC2018SweepStake
             PotThreeTeams.Add("Tunisia");
             PotThreeTeams.Add("Egypt");
             PotThreeTeams.Add("Senegal");
-            PotThreeTeams.Add("Iran");
+            //PotThreeTeams.Add("Iran");
 
             List<string> PotFourTeams = new List<string>();
             PotFourTeams.Add("Serbia");
@@ -75,12 +75,12 @@ namespace WC2018SweepStake
             PotFourTeams.Add("Morocco");
             PotFourTeams.Add("Panama");
             PotFourTeams.Add("South Korea");
-            PotFourTeams.Add("Saudi Arabia");
+            //PotFourTeams.Add("Saudi Arabia");
 
             //Create Sweepstake players
             List<Lad> lads = new List<Lad>();
-            Lad james = new Lad("James");
-            lads.Add(james);
+            //Lad james = new Lad("James");
+            lads.Add(new Lad james("James"));
             Lad harry = new Lad("Harry");
             lads.Add(harry);
             Lad connor = new Lad("Connor");
