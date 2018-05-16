@@ -38,7 +38,7 @@ namespace WC2018SweepStake
         {
             //Add Teams to each pot
             List<string> PotOneTeams = new List<string>();
-            PotOneTeams.Add("Russia");
+            //PotOneTeams.Add("Russia");
             PotOneTeams.Add("Germany");
             PotOneTeams.Add("Brazil");
             PotOneTeams.Add("Portugal");
@@ -49,7 +49,7 @@ namespace WC2018SweepStake
 
             List<string> PotTwoTeams = new List<string>();
             PotTwoTeams.Add("Spain");
-            PotTwoTeams.Add("Peru");
+            //PotTwoTeams.Add("Peru");
             PotTwoTeams.Add("Switzerland");
             PotTwoTeams.Add("England");
             PotTwoTeams.Add("Colombia");
