@@ -44,18 +44,18 @@ namespace WC2018SweepStake
             PotOneTeams.Add("Portugal");
             PotOneTeams.Add("Argentina");
             PotOneTeams.Add("Belgium");
-            PotOneTeams.Add("Poland");
+            PotOneTeams.Add("Spain");
             PotOneTeams.Add("France");
 
             List<string> PotTwoTeams = new List<string>();
-            PotTwoTeams.Add("Spain");
-            //PotTwoTeams.Add("Peru");
+            PotTwoTeams.Add("Poland");
+            PotTwoTeams.Add("Peru");
             PotTwoTeams.Add("Switzerland");
             PotTwoTeams.Add("England");
             PotTwoTeams.Add("Colombia");
             PotTwoTeams.Add("Mexico");
             PotTwoTeams.Add("Uruguay");
-            PotTwoTeams.Add("Croatia");
+            //PotTwoTeams.Add("Croatia");
 
             List<string> PotThreeTeams = new List<string>();
             PotThreeTeams.Add("Denmark");
@@ -64,7 +64,8 @@ namespace WC2018SweepStake
             PotThreeTeams.Add("Sweden");
             PotThreeTeams.Add("Tunisia");
             PotThreeTeams.Add("Egypt");
-            PotThreeTeams.Add("Senegal");
+            PotThreeTeams.Add("Croatia");
+            //PotThreeTeams.Add("Senegal");
             //PotThreeTeams.Add("Iran");
 
             List<string> PotFourTeams = new List<string>();
@@ -72,15 +73,18 @@ namespace WC2018SweepStake
             PotFourTeams.Add("Nigeria");
             PotFourTeams.Add("Australia");
             PotFourTeams.Add("Japan");
-            PotFourTeams.Add("Morocco");
-            PotFourTeams.Add("Panama");
             PotFourTeams.Add("South Korea");
+            PotFourTeams.Add("Iran");
+            PotFourTeams.Add("Senegal");
+            //PotFourTeams.Add("Morocco");
+            //PotFourTeams.Add("Panama");
             //PotFourTeams.Add("Saudi Arabia");
+
 
             //Create Sweepstake players
             List<Lad> lads = new List<Lad>();
-            //Lad james = new Lad("James");
-            lads.Add(new Lad james("James"));
+            Lad james = new Lad("James");
+            lads.Add(james);
             Lad harry = new Lad("Harry");
             lads.Add(harry);
             Lad connor = new Lad("Connor");
