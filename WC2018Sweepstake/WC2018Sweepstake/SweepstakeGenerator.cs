@@ -1,143 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
 
-namespace WC2018SweepStake
+namespace WC2019SweepStake
 {
-    public class Lad
-    {
-
-        public string name;
-        public string PotOneTeam { get; set; }
-        public string PotTwoTeam { get; set; }
-        public string PotThreeTeam { get; set; }
-        public string PotFourTeam { get; set; }
-
-        public Lad(string Name)
-        {
-            name = Name;
-        }
-
-        public void PrintRecievedTeams()
-        {
-            if (PotOneTeam == null || PotTwoTeam == null || PotThreeTeam == null || PotFourTeam == null)
-            {
-                Console.WriteLine(name + " has not got four teams associated with them.");
-            }
-            else
-            {
-                Console.WriteLine(name + " has: " + PotOneTeam + ", " + PotTwoTeam + ", " + PotThreeTeam + ", and " + PotFourTeam + ".");
-            }
-        }
-    }
-
-
     class Program
     {
-
         static void Main(string[] args)
         {
-            //Add Teams to each pot
-            List<string> PotOneTeams = new List<string>();
-            //PotOneTeams.Add("Russia");
-            PotOneTeams.Add("Germany");
-            PotOneTeams.Add("Brazil");
-            PotOneTeams.Add("Portugal");
-            PotOneTeams.Add("Argentina");
-            PotOneTeams.Add("Belgium");
-            PotOneTeams.Add("Spain");
-            PotOneTeams.Add("France");
+            //Populate Team List
+            List<Team> Teams = new List<Team>
+            {
+                new Team("United States", 1, 4.5),
+                new Team("France", 3, 4.5),
+                new Team("Germany", 2, 6.5),
+                new Team("England", 4, 7),
+                new Team("Canada", 5, 21),
+                new Team("Australia", 6, 15),
+                new Team("Netherlands", 7, 15),
+                new Team("Japan", 8, 15),
+                new Team("Sweden", 9, 26),
+                new Team("Brazil", 10, 26),
+                new Team("Spain", 12, 26),
+                new Team("Norway", 13, 34),
+                new Team("South Korea", 14, 101),
+                new Team("China PR", 15, 67),
+                new Team("Italy", 16, 51),
+                new Team("New Zealand", 19, 126),
+                new Team("Scotland", 20, 151),
+                new Team("Thailand", 29, 1501),
+                new Team("Argentina", 36, 401),
+                new Team("Chile", 38, 501),
+                new Team("Nigeria", 39, 501),
+                new Team("Cameroon", 46, 751),
+                new Team("South Africa", 48, 501),
+                new Team("Jamaica", 53, 1001)
+            };
 
-            List<string> PotTwoTeams = new List<string>();
-            PotTwoTeams.Add("Poland");
-            PotTwoTeams.Add("Peru");
-            PotTwoTeams.Add("Switzerland");
-            PotTwoTeams.Add("England");
-            PotTwoTeams.Add("Colombia");
-            PotTwoTeams.Add("Mexico");
-            PotTwoTeams.Add("Uruguay");
-            //PotTwoTeams.Add("Croatia");
-
-            List<string> PotThreeTeams = new List<string>();
-            PotThreeTeams.Add("Denmark");
-            PotThreeTeams.Add("Iceland");
-            PotThreeTeams.Add("Costa Rica");
-            PotThreeTeams.Add("Sweden");
-            PotThreeTeams.Add("Tunisia");
-            PotThreeTeams.Add("Egypt");
-            PotThreeTeams.Add("Croatia");
-            //PotThreeTeams.Add("Senegal");
-            //PotThreeTeams.Add("Iran");
-
-            List<string> PotFourTeams = new List<string>();
-            PotFourTeams.Add("Serbia");
-            PotFourTeams.Add("Nigeria");
-            PotFourTeams.Add("Australia");
-            PotFourTeams.Add("Japan");
-            PotFourTeams.Add("South Korea");
-            PotFourTeams.Add("Iran");
-            PotFourTeams.Add("Senegal");
-            //PotFourTeams.Add("Morocco");
-            //PotFourTeams.Add("Panama");
-            //PotFourTeams.Add("Saudi Arabia");
-
+            //Order Teams
+            Teams = Teams.OrderBy(x => x.Odds).ToList();
+            //Teams = Teams.OrderBy(x => x.FifaRanking).ToList();
 
             //Create Sweepstake players
-            List<Lad> lads = new List<Lad>();
-            Lad james = new Lad("James");
-            lads.Add(james);
-            Lad harry = new Lad("Harry");
-            lads.Add(harry);
-            Lad connor = new Lad("Connor");
-            lads.Add(connor);
-            Lad dan = new Lad("Dan");
-            lads.Add(dan);
-            Lad glenn = new Lad("Glenn");
-            lads.Add(glenn);
-            Lad joe = new Lad("Joe");
-            lads.Add(joe);
-            Lad john = new Lad("John");
-            lads.Add(john);
-
-            //Randomises Lad order
-            Random rng = new Random();
-            int n = lads.Count;
-            while (n > 1)
+            List<Lad> lads = new List<Lad>
             {
-                n--;
-                int k = rng.Next(n + 1);
-                Lad value = lads[k];
-                lads[k] = lads[n];
-                lads[n] = value;
+                new Lad("James"),
+                new Lad("Harry"),
+                new Lad("Connor"),
+                new Lad("Dan"),
+                new Lad("Glenn"),
+                new Lad("Joe"),
+                new Lad("John")
+            };
+
+            //Create and Assign Teams to Pots
+            int potNo = 1;
+            int i = 1;
+            Pot currentPot = new Pot(potNo);
+            List<Pot> pots = new List<Pot> { currentPot };
+            foreach (Team t in Teams)
+            {
+                t.Pot = currentPot;
+                currentPot.Teams.Add(t);
+
+                if (i % lads.Count == 0)
+                {
+                    potNo++;
+                    currentPot = new Pot(potNo);
+                    pots.Add(currentPot);
+                }
+                i++;
             }
 
-            //Need some more girls in here
-            if (lads.Count > PotOneTeams.Count)
+            foreach (Pot pot in pots)
             {
-                throw new ArgumentException("Too many lads");
+                int n = 0;
+                //Randomises Lad order
+                Random rng = new Random();
+                lads = Lad.RandomiseOrder(rng, lads);
+
+                foreach (var lad in lads)
+                {
+                    if (n < pot.Teams.Count) { lad.Teams.Add(pot.Teams[n]);}
+                    n++;
+                }
             }
 
-            Random rnd = new Random();
-            foreach (Lad lad in lads)
+            foreach (var lad in lads)
             {
-                //chooses at random which team in each pot Lad will get
-                int potOneRand = rnd.Next(PotOneTeams.Count);
-                int potTwoRand = rnd.Next(PotTwoTeams.Count);
-                int potThreeRand = rnd.Next(PotThreeTeams.Count);
-                int potFourRand = rnd.Next(PotFourTeams.Count);
-
-                //Assigns lad team from each pot
-                lad.PotOneTeam = PotOneTeams[potOneRand];
-                PotOneTeams.RemoveAt(potOneRand);
-
-                lad.PotTwoTeam = PotTwoTeams[potTwoRand];
-                PotTwoTeams.RemoveAt(potTwoRand);
-
-                lad.PotThreeTeam = PotThreeTeams[potThreeRand];
-                PotThreeTeams.RemoveAt(potThreeRand);
-
-                lad.PotFourTeam = PotFourTeams[potFourRand];
-                PotFourTeams.RemoveAt(potFourRand);
-
                 lad.PrintRecievedTeams();
             }
 
