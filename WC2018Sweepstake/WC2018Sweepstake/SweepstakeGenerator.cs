@@ -74,6 +74,21 @@ namespace WC2019SweepStake
             Teams = Teams.OrderBy(x => x.Odds).ToList();
             //Teams = Teams.OrderBy(x => x.FifaRanking).ToList();
 
+            //Print out pots
+            int line = 1;
+            Console.WriteLine($"Pot 1");
+            foreach (Team team in Teams)
+            {
+                Console.WriteLine($"{team.Name} - {team.FifaRanking} - {team.Odds}");
+                if (line % 7 == 0) { Console.WriteLine($"\nPot {(line/7)+1}"); }
+                line++;
+            }
+
+            Console.WriteLine($"\n----------------------------------\n");
+            Console.WriteLine($"Press Enter to draw...\n");
+            Console.ReadKey();
+
+
             //Create Sweepstake players
             List<Lad> lads = new List<Lad>
             {
