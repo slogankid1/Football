@@ -10,7 +10,7 @@ namespace WC2019SweepStake
         static void Main(string[] args)
         {
             //Populate Team List
-            List<Team> Teams = new List<Team>
+            List<Team> teams2018 = new List<Team>
             {
                 new Team("United States", 1, 4.5),
                 new Team("France", 3, 4.5),
@@ -37,6 +37,38 @@ namespace WC2019SweepStake
                 new Team("South Africa", 48, 501),
                 new Team("Jamaica", 53, 1001)
             };
+
+            List<Team> teams2021 = new List<Team>
+            {
+                //Odds from bet365 as of 2/6/2021
+                new Team("Austria", 23, 80),
+                new Team("Belgium", 1, 6),
+                new Team("Croatia", 14, 33),
+                new Team("Czech Republic", 40, 150),
+                new Team("Denmark", 10, 28),
+                new Team("England", 4, 5),
+                new Team("Finland", 54, 500),
+                new Team("France", 2, 4.5),
+                new Team("Germany", 12, 7),
+                new Team("Hungary", 37, 400),
+                new Team("Italy", 7, 11),
+                new Team("Netherlands", 16, 12),
+                new Team("North Macedonia", 62, 500),
+                new Team("Poland", 21, 80),
+                new Team("Portugal", 5, 8),
+                new Team("Russia", 38, 66),
+                new Team("Scotland", 44, 250),
+                new Team("Slovakia", 36, 250),
+                new Team("Spain", 6, 7.5),
+                new Team("Sweden", 18, 100),
+                new Team("Switzerland", 13, 66),
+                new Team("Turkey", 29, 66),
+                new Team("Ukraine", 24, 66),
+                new Team("Wales", 17, 100)
+            };
+
+            //Select which tournament
+            List<Team> Teams = teams2021;
 
             //Order Teams
             Teams = Teams.OrderBy(x => x.Odds).ToList();
@@ -87,10 +119,7 @@ namespace WC2019SweepStake
                 }
             }
 
-            foreach (var lad in lads)
-            {
-                lad.PrintRecievedTeams();
-            }
+            foreach (var lad in lads){lad.PrintRecievedTeams();}
 
             Console.ReadKey();
         }
