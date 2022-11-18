@@ -38,7 +38,7 @@ namespace WC2019SweepStake
                 new Team("Jamaica", 53, 1001)
             };
 
-            List<Team> teams2021 = new List<Team>
+            List<Team> teams2020 = new List<Team>
             {
                 //Odds from bet365 as of 2/6/2021
                 new Team("Austria", 23, 80),
@@ -66,28 +66,50 @@ namespace WC2019SweepStake
                 new Team("Ukraine", 24, 66),
                 new Team("Wales", 17, 100)
             };
+            
+            List<Team> teams2022 = new List<Team>
+            {
+                //Odds from skybet as of 18/11/2021. CBA to do fifa ranking
+                new Team("Brazil", 23, 3.5),
+                new Team("Argentina", 1, 5.5),
+                new Team("France", 14, 5.5),
+                new Team("England", 40, 7.5),
+                new Team("Spain", 10, 8),
+                new Team("Germany", 4, 10),
+                new Team("Netherlands", 54, 11),
+                new Team("Portugal", 2, 14),
+                new Team("Belgium", 12, 16),
+                new Team("Denmark", 37, 28),
+                new Team("Uruguay", 7, 40),
+                new Team("Croatia", 16, 50),
+                new Team("Serbia", 62, 80),
+                new Team("Switzerland", 21, 80),
+                new Team("Mexico", 5, 100),
+                new Team("Poland", 38, 100),
+                new Team("Senegal", 44, 100),
+                new Team("USA", 36, 100),
+                new Team("Ecuador", 6, 150),
+                new Team("Wales", 18, 150),
+                new Team("Japan", 13, 200),
+                new Team("Cameroon", 29, 250),
+                new Team("Morocco", 24, 250),
+                new Team("South Korea", 17, 250),
+                new Team("Australia", 6, 500),
+                new Team("Canada", 18, 500),
+                new Team("Ghana", 13, 500),
+                new Team("Iran", 29, 500),
+                new Team("Tunisia", 24, 250),
+                new Team("Costa Rica", 17, 750),
+                new Team("Qatar", 17, 750),
+                new Team("Saudi Arabia", 17, 750),
+            };
 
             //Select which tournament
-            List<Team> Teams = teams2021;
+            List<Team> Teams = teams2022;
 
             //Order Teams
             Teams = Teams.OrderBy(x => x.Odds).ToList();
             //Teams = Teams.OrderBy(x => x.FifaRanking).ToList();
-
-            //Print out pots
-            int line = 1;
-            Console.WriteLine($"Pot 1");
-            foreach (Team team in Teams)
-            {
-                Console.WriteLine($"{team.Name} - {team.FifaRanking} - {team.Odds}");
-                if (line % 7 == 0) { Console.WriteLine($"\nPot {(line/7)+1}"); }
-                line++;
-            }
-
-            Console.WriteLine($"\n----------------------------------\n");
-            Console.WriteLine($"Press Enter to draw...\n");
-            Console.ReadKey();
-
 
             //Create Sweepstake players
             List<Lad> lads = new List<Lad>
@@ -98,7 +120,8 @@ namespace WC2019SweepStake
                 new Lad("Dan"),
                 new Lad("Glenn"),
                 new Lad("Joe"),
-                new Lad("John")
+                new Lad("John"),
+                new Lad("Tim")
             };
 
             //Create and Assign Teams to Pots
@@ -119,6 +142,21 @@ namespace WC2019SweepStake
                 }
                 i++;
             }
+
+            //Print out pots
+            int line = 1;
+            Console.WriteLine($"Pot 1");
+            foreach (Team team in Teams)
+            {
+                Console.WriteLine($"{team.Name} - {team.FifaRanking} - {team.Odds}");
+                if (line % lads.Count == 0) { Console.WriteLine($"\nPot {(line / lads.Count) + 1}"); }
+                line++;
+            }
+
+            Console.WriteLine($"\n----------------------------------\n");
+            Console.WriteLine($"Press Enter to draw...\n");
+            Console.ReadKey();
+
 
             foreach (Pot pot in pots)
             {
